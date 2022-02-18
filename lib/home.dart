@@ -1,5 +1,5 @@
-import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:sistema_chamados/telas/abrir_chamado.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -11,23 +11,63 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return ScaffoldPage(
-      header: Text('Sistema de chamados SB'),
-      content: NavigationView(
-          appBar: const NavigationAppBar(
-            title: Text("Sistema de chamados SB")),
-          pane: NavigationPane(
-            displayMode: PaneDisplayMode.auto,
-            items: [
-              PaneItem(
-                icon: const Icon(Icons.desktop_windows_outlined),
-                title: const Text("Abrir chamado")
-              ),
-              PaneItem(
-                icon: const Icon(Icons.search_outlined),
-                title: const Text("Pesquisar chamado")
-              )
-            ] 
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Sistema de chamados SB"),
+        backgroundColor: const Color(0xFF25D366),
+      ),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+             Container(
+              width: 200,
+              height: 200,
+              color: const Color(0xFFFFFFFF),
+              child: ElevatedButton(
+                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AbrirChamado())),
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xFFFFFFFF)
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                   Icon(Icons.computer_outlined, size: 50, color: Colors.black,),
+                   Text("Abrir Chamado",
+                   style: TextStyle(
+                     color: Colors.black,
+                     fontWeight: FontWeight.bold
+                    ),
+                   ),
+                ],)
+                ),
+            ),
+            const SizedBox(width: 10),
+            Container(
+              width: 200,
+              height: 200,
+              color: const Color(0xFFFFFFFF),
+              child: ElevatedButton(
+                onPressed: (){},
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xFFFFFFFF)
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(Icons.search_outlined,
+                   size: 50,
+                   color: Colors.black,
+                   ),
+                   Text("Pesquisar Chamado",
+                     style: TextStyle(
+                       color: Colors.black,
+                       fontWeight: FontWeight.bold )
+                       ),
+                ],)
+                ),
+            )
+          ],
           ),
       ),
     );
