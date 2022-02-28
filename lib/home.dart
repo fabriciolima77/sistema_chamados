@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sistema_chamados/telas/abrir_chamado.dart';
 
 class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -13,8 +13,11 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sistema de chamados SB"),
-        backgroundColor: const Color(0xFF25D366),
+        title: Image.asset('lib/images/sb-logo.png', fit: BoxFit.contain, width: 198,),
+        backgroundColor: const Color(0xFFFFFFFF),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(8))
+          ),
       ),
       body: Center(
         child: Row(
@@ -48,7 +51,7 @@ class _HomeState extends State<Home> {
               height: 200,
               color: const Color(0xFFFFFFFF),
               child: ElevatedButton(
-                onPressed: (){},
+                onPressed: null,
                 style: ElevatedButton.styleFrom(
                   primary: const Color(0xFFFFFFFF)
                 ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:sistema_chamados/widgets/button.dart';
 import 'package:sistema_chamados/widgets/text_field.dart';
 
 class AbrirChamado extends StatefulWidget {
@@ -9,7 +11,7 @@ class AbrirChamado extends StatefulWidget {
 }
 
 class _AbrirChamadoState extends State<AbrirChamado> {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController solicitanteController = TextEditingController();
   TextEditingController departamentoController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -22,16 +24,24 @@ class _AbrirChamadoState extends State<AbrirChamado> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Abrir Chamado"),
-        backgroundColor: const Color(0xFF25D366),
+        title: Image.asset('lib/images/sb-logo.png', fit: BoxFit.contain, width: 198,),
+        backgroundColor: const Color(0xFFFFFFFF),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(8))
+          ),
       ),
       body: Center(
         child: SingleChildScrollView(
           child: Form(
-            key: formKey,
+            key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                const Text("Abrir Chamado",
+                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                 textAlign: TextAlign.start,
+                 ),
+                const SizedBox(height:60),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -48,8 +58,10 @@ class _AbrirChamadoState extends State<AbrirChamado> {
                             ),
                             BuildTextField(
                                 keyboardType: TextInputType.text,
-                                hintText: "solicitante",
-                                controller: solicitanteController),
+                                hintText: "Solicitante",
+                                controller: solicitanteController,
+                                maxLines: 1,
+                                ),
                           ],
                         ),
                       ),
@@ -62,13 +74,15 @@ class _AbrirChamadoState extends State<AbrirChamado> {
                               padding: EdgeInsets.all(5),
                               child: Align(
                                 alignment: Alignment.bottomLeft,
-                                child: Text("Departamento: "),
+                                child: Text("Setor: "),
                               ),
                             ),
                             BuildTextField(
                                 keyboardType: TextInputType.text,
-                                hintText: "departamento",
-                                controller: departamentoController),
+                                hintText: "Setor em que você trabalha",
+                                controller: departamentoController,
+                                maxLines: 1,
+                                ),
                           ],
                         ),
                       )
@@ -86,13 +100,15 @@ class _AbrirChamadoState extends State<AbrirChamado> {
                               padding: EdgeInsets.all(5),
                               child: Align(
                                 alignment: Alignment.bottomLeft,
-                                child: Text("e-mail: "),
+                                child: Text("E-mail: "),
                               ),
                             ),
                             BuildTextField(
                                 keyboardType: TextInputType.emailAddress,
-                                hintText: "e-mail",
-                                controller: emailController),
+                                hintText: "E-mail institucional",
+                                controller: emailController,
+                                maxLines: 1,
+                                ),
                           ],
                         ),
                       ),
@@ -111,7 +127,9 @@ class _AbrirChamadoState extends State<AbrirChamado> {
                             BuildTextField(
                                 keyboardType: TextInputType.number,
                                 hintText: "número contato",
-                                controller: numeroController),
+                                controller: numeroController,
+                                maxLines: 1,
+                                ),
                           ],
                         ),
                       )
@@ -131,8 +149,10 @@ class _AbrirChamadoState extends State<AbrirChamado> {
                         ),
                         BuildTextField(
                             keyboardType: TextInputType.text,
-                            hintText: "título",
-                            controller: tituloController),
+                            hintText: "Resumo do chamado",
+                            controller: tituloController,
+                            maxLines: 1,
+                            ),
                       ],
                     ),
                   ),
@@ -141,7 +161,6 @@ class _AbrirChamadoState extends State<AbrirChamado> {
                   ),
                   SizedBox(
                       width: 500,
-                      height: 400,
                       child: Column(
                         children: [
                           const Padding(
@@ -153,14 +172,44 @@ class _AbrirChamadoState extends State<AbrirChamado> {
                           ),
                           BuildTextField(
                               keyboardType: TextInputType.text,
-                              hintText: "descrição",
-                              controller: descricaoController),
+                              hintText: "Breve descrição do seu chamado",
+                              controller: descricaoController,
+                              maxLines: 5,
+                              ),
                         ],
-                      ))
+                      )),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        width: 400,
+                        height: 50,
+                        child: BuildButton(
+                          onPressed: (){
+                            if(_formKey.currentState!.validate()){
+                              iniciaChamado();
+                            }
+                          },
+                          text: "ABRIR CHAMADO",
+                          ),
+                      )
                 ]),
           ),
         ),  
       ),
     );
   }
+
+void iniciaChamado() async {
+  
+
+    String _mensagem = "*👤 Solicitante:* ${solicitanteController.text}\n*🏢 Departamento:* ${departamentoController.text}\n*📧 E-Mail:* ${emailController.text}\n*📱 Número:* ${numeroController.text}\n*📄 Título:* ${tituloController.text}\n*📝 Descrição:* ${descricaoController.text}";
+    String _url =
+      'https://api.whatsapp.com/send/?phone=${Uri.encodeFull("+5585986364943")}&text=${Uri.encodeFull(_mensagem)}&app_absent=0';
+
+    if (await canLaunch(_url)) {
+      await launch(_url);
+    } else {
+      throw 'Não foi possivel iniciar $_url';
+    }
+  }
+  
 }

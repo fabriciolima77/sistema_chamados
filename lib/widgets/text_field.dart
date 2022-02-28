@@ -6,24 +6,34 @@ class BuildTextField extends StatelessWidget {
     required this.keyboardType,
     required this.hintText,
     required this.controller,
+    required this.maxLines,
 
     }) : super(key: key);
 
     final TextInputType keyboardType;
     final String hintText;
+    final int maxLines;
     final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+    validator: (value) {
+      if(value == null || value.isEmpty){
+        return("Campo Obrigatório!");
+      }return null;
+    },
     keyboardType: keyboardType,
-    maxLines: null,
+    maxLines: maxLines,
     decoration: InputDecoration(
       hintText: hintText,
       contentPadding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
       hintStyle: TextStyle(color: Colors.grey[600]),
       filled: true,
       fillColor: Colors.white54,
+      errorBorder: const OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.red)
+      ),
       enabledBorder: const OutlineInputBorder(
         borderSide: BorderSide(color: Colors.grey),
       ),
