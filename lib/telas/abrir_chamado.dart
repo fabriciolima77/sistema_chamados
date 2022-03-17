@@ -30,154 +30,144 @@ class _AbrirChamadoState extends State<AbrirChamado> {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(8))
           ),
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Abrir Chamado",
-                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-                 textAlign: TextAlign.start,
-                 ),
-                const SizedBox(height:60),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 245,
-                      child: Column(
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.all(5),
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Text("Nome do solicitante: "),
-                              ),
-                            ),
-                            BuildTextField(
-                                keyboardType: TextInputType.text,
-                                hintText: "Solicitante",
-                                controller: solicitanteController,
-                                maxLines: 1,
-                                ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      SizedBox(
-                        width: 245,
-                        child: Column(
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.all(5),
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Text("Setor: "),
-                              ),
-                            ),
-                            BuildTextField(
-                                keyboardType: TextInputType.text,
-                                hintText: "Setor em que você trabalha",
-                                controller: departamentoController,
-                                maxLines: 1,
-                                ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 245,
-                      child: Column(
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.all(5),
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Text("E-mail: "),
-                              ),
-                            ),
-                            BuildTextField(
-                                keyboardType: TextInputType.emailAddress,
-                                hintText: "E-mail institucional",
-                                controller: emailController,
-                                maxLines: 1,
-                                ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      SizedBox(
-                        width: 245,
-                        child: Column(
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.all(5),
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Text("Número Contato: "),
-                              ),
-                            ),
-                            BuildTextField(
-                                keyboardType: TextInputType.number,
-                                hintText: "número contato",
-                                controller: numeroController,
-                                maxLines: 1,
-                                ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 10),
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: const [
+                  SizedBox(height: 40),
                   SizedBox(
                     width: 500,
-                    child: Column(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(5),
-                          child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text("Título: "),
-                          ),
-                        ),
-                        BuildTextField(
-                            keyboardType: TextInputType.text,
-                            hintText: "Resumo do chamado",
-                            controller: tituloController,
-                            maxLines: 1,
-                            ),
-                      ],
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text("Abrir Chamado: ",
+                        style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.left,
+                      ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                      width: 500,
-                      child: Column(
+                  SizedBox(height:20),
+                ],
+              ),
+              Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.all(5),
-                            child: Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Text("Descrição: "),
+                          SizedBox(
+                            width: 245,
+                            child: Column(
+                              children: [
+                                BuildTextField(
+                                  keyboardType: TextInputType.text,
+                                  icon: const Icon(Icons.person),
+                                  hintText: "Solicitante.",
+                                  controller: solicitanteController,
+                                  maxLines: 1,
+                                  title: 'Nome do solicitante: ',
+                                  obscure: false,
+                                ),
+                              ],
                             ),
                           ),
-                          BuildTextField(
-                              keyboardType: TextInputType.text,
-                              hintText: "Breve descrição do seu chamado",
-                              controller: descricaoController,
-                              maxLines: 5,
-                              ),
+                          const SizedBox(width: 10),
+                          SizedBox(
+                            width: 245,
+                            child: Column(
+                              children: [
+                                BuildTextField(
+                                  keyboardType: TextInputType.text,
+                                  icon: const Icon(Icons.business_outlined),
+                                  hintText: "Setor em que você trabalha.",
+                                  controller: departamentoController,
+                                  maxLines: 1,
+                                  title: 'Setor: ',
+                                  obscure: false,
+                                ),
+                              ],
+                            ),
+                          )
                         ],
-                      )),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 245,
+                            child: Column(
+                              children: [
+                                BuildTextField(
+                                  keyboardType: TextInputType.emailAddress,
+                                  icon: const Icon(Icons.mail_outline),
+                                  hintText: "E-mail institucional.",
+                                  controller: emailController,
+                                  maxLines: 1,
+                                  title: 'E-mail institucional: ',
+                                  obscure: false,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          SizedBox(
+                            width: 245,
+                            child: Column(
+                              children: [
+                                BuildTextField(
+                                  keyboardType: TextInputType.number,
+                                  icon: const Icon(Icons.phone_android_outlined),
+                                  hintText: "Número contato.",
+                                  controller: numeroController,
+                                  maxLines: 1,
+                                  title: 'Número Contato: ',
+                                  obscure: false,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        width: 500,
+                        child: Column(
+                          children: [
+                            BuildTextField(
+                              keyboardType: TextInputType.text,
+                              icon: const Icon(Icons.announcement_outlined),
+                              hintText: "Resumo do chamado.",
+                              controller: tituloController,
+                              maxLines: 1,
+                              title: 'Título: ',
+                              obscure: false,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                          width: 500,
+                          child: Column(
+                            children: [
+                              BuildTextField(
+                                keyboardType: TextInputType.text,
+                                icon: const Icon(Icons.analytics_outlined),
+                                hintText: "Breve descrição do seu chamado.",
+                                controller: descricaoController,
+                                maxLines: 5,
+                                title: 'Descrição: ',
+                                obscure: false,
+                              ),
+                            ],
+                          )),
                       const SizedBox(height: 20),
                       SizedBox(
                         width: 400,
@@ -189,11 +179,13 @@ class _AbrirChamadoState extends State<AbrirChamado> {
                             }
                           },
                           text: "ABRIR CHAMADO",
-                          ),
+                        ),
                       )
-                ]),
+                    ]),
+              ),
+            ],
           ),
-        ),  
+        ),
       ),
     );
   }
@@ -201,7 +193,12 @@ class _AbrirChamadoState extends State<AbrirChamado> {
 void iniciaChamado() async {
   
 
-    String _mensagem = "*👤 Solicitante:* ${solicitanteController.text}\n*🏢 Departamento:* ${departamentoController.text}\n*📧 E-Mail:* ${emailController.text}\n*📱 Número:* ${numeroController.text}\n*📄 Título:* ${tituloController.text}\n*📝 Descrição:* ${descricaoController.text}";
+    String _mensagem = "*👤 Solicitante:* ${solicitanteController.text}\n"
+        "*🏢 Departamento:* ${departamentoController.text}\n"
+        "*📧 E-Mail:* ${emailController.text}\n"
+        "*📱 Número:* ${numeroController.text}\n"
+        "*📄 Título:* ${tituloController.text}\n"
+        "*📝 Descrição:* ${descricaoController.text}";
     String _url =
       'https://api.whatsapp.com/send/?phone=${Uri.encodeFull("+5585986364943")}&text=${Uri.encodeFull(_mensagem)}&app_absent=0';
 
